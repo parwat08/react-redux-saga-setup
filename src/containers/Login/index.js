@@ -2,12 +2,12 @@ import React, { Component, Fragment } from "react";
 
 class Login extends Component {
   state = {
-    component: 'login'
+    component: "login"
   };
 
   render() {
     const login = () => {
-        console.log('----', this.state)
+      console.log("----", this.state);
     };
 
     return (
@@ -18,8 +18,8 @@ class Login extends Component {
           value={this.state.username}
           id="username"
           placeholder="Username"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
         />
         <input
           type="password"
@@ -27,7 +27,7 @@ class Login extends Component {
           value={this.state.password}
           id="password"
           placeholder="Password"
-          autocomplete="off"
+          autoComplete="off"
         />
         <button onClick={login}>Login</button>
       </Fragment>

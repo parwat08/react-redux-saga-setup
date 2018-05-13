@@ -1,7 +1,21 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from "react-dom";
-import Login from "./components/login";
+import { Provider } from "react-redux";
 
-const NODE = document.getElementById("app");
+import Login from "./containers/Login";
 
-ReactDOM.render(<Login />, NODE);
+import configureStore from "./configureStore";
+
+const initialState = {
+  login: {}
+};
+
+const store = configureStore(initialState);
+const MOUNT_NODE = document.getElementById("app");
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Login />
+  </Provider>,
+  MOUNT_NODE
+);
