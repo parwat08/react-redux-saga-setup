@@ -1,32 +1,33 @@
-import { take, actionChannel, put } from "redux-saga/effects";
+import { takeLatest, call, put, fork, all } from "redux-saga/effects";
+import axios from "axios";
 
-import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_ERROR } from "./actions";
+import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_ERROR } from "./constants";
 
-export function* watcherLogin() {
-  yield takeLatest(LOG_IN, workerSaga);
+function* watcherLoginSaga() {
+  yield takeLatest(LOG_IN, workerLoginSaga);
 }
 
-function fetchDog(method, url) {
-  return axios({
-    method,
-    url
-  });
-}
-
-function* workerSaga() {
+function* workerLoginSaga(payload) {
+  let { type, data } = payload;
   try {
-    const method = "get";
-    const url = "https://dog.ceo/api/breeds/image/random";
+    const url = "http://localhost:9000/api/v1/login";
 
     const response = yield call(() => {
-      fetchDog(method, url);
+      return axios.post(url, data);
     });
-    const dog = response.data.message;
+
+    console.log("===", response);
+    const data = response.data;
 
     // dispatch a success action to the store with the new dog
-    yield put({ type: LOG_IN_SUCCESS, dog });
+    yield put({ type: LOG_IN_SUCCESS, data });
   } catch (error) {
+    console.log("​}catch -> error", error);
     // dispatch a failure action to the store with the error
-    yield put({ type: LOG_IN_FAILURE, error });
+    yield put({ type: LOG_IN_ERROR, error });
   }
+}
+
+export default function* rootSaga() {
+  yield all([fork(watcherLoginSaga)]);
 }

@@ -16,9 +16,9 @@ const initialState = fromJS({
 });
 
 export default function loginReducer(state = initialState, action) {
-  console.log("​loginReducer -> state", state);
   switch (action.type) {
     case LOG_IN:
+      console.log(state);
       return state.set("loading", true).set("error", false);
     case LOG_IN_SUCCESS:
       return state.set("currentUser", action.data).set("loading", false);

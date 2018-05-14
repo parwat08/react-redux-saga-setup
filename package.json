@@ -20,18 +20,22 @@
   "homepage": "https://gitlab.com/RajanPN/cr-project-app#README",
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.1.1",
     "immutable": "^3.8.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-redux": "^4.0.8",
+    "reactstrap": "^6.0.1",
     "redux": "^4.0.0",
+    "redux-form": "^7.3.0",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "webpack": "^4.8.1",

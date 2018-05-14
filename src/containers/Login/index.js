@@ -1,38 +1,59 @@
 import React, { Component, Fragment } from "react";
+import { Button } from "reactstrap";
+
+import { login } from "./actions";
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
-    component: "login"
+    email: "",
+    password: ""
+  };
+
+  handleChange = event => {
+    let name = event.target.name;
+    let value = event.target.value;
+    this.setState(prevState => ({
+      [name]: value
+    }));
   };
 
   render() {
-    const login = () => {
-      console.log("----", this.state);
-    };
+    const { handleLogin } = this.props;
 
     return (
       <Fragment>
         <input
-          type="text"
-          name="username"
-          value={this.state.username}
-          id="username"
-          placeholder="Username"
-          autoComplete="off"
-          autoFocus
+          type="email"
+          name="email"
+          value={this.state.email}
+          onChange={event => this.handleChange(event)}
         />
         <input
           type="password"
           name="password"
           value={this.state.password}
-          id="password"
-          placeholder="Password"
-          autoComplete="off"
+          onChange={event => this.handleChange(event)}
         />
-        <button onClick={login}>Login</button>
+        <Button
+          color="primary"
+          onClick={() => {
+            handleLogin(this.state);
+          }}
+        >
+          Login
+        </Button>
       </Fragment>
     );
   }
 }
 
-export default Login;
+function mapDispatchToProps(dispatch) {
+  return {
+    handleLogin: data => {
+      dispatch(login(data));
+    }
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Login);

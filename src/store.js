@@ -1,13 +1,12 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { fromJS } from "immutable";
 import createSagaMiddleware from "redux-saga";
 
 import rootReducer from "./combineReducers";
-console.log("​combineReducer", rootReducer);
+import { initSagas } from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(initialState = {}) {
+export default function configureStore(initialState) {
   const middlewares = [sagaMiddleware];
   const enhancers = [applyMiddleware(...middlewares)];
 
@@ -23,12 +22,15 @@ export default function configureStore(initialState = {}) {
           shouldHotReload: false
         })
       : compose;
+  /* eslint-enable */
 
   const store = createStore(
     rootReducer,
-    fromJS(initialState),
+    initialState,
     composeEnhancers(...enhancers)
   );
+
+  initSagas(sagaMiddleware);
 
   return store;
 }
