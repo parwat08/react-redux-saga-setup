@@ -16,11 +16,10 @@ function* workerLoginSaga(payload) {
       return axios.post(url, data);
     });
 
-    console.log("===", response);
-    const data = response.data;
+    const resp = response.data;
 
     // dispatch a success action to the store with the new dog
-    yield put({ type: LOG_IN_SUCCESS, data });
+    yield put({ type: LOG_IN_SUCCESS, data: resp });
   } catch (error) {
     console.log("​}catch -> error", error);
     // dispatch a failure action to the store with the error
