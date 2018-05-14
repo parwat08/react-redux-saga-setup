@@ -48,12 +48,10 @@ class Login extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleLogin: data => {
-      dispatch(login(data));
-    }
-  };
-}
+const mapStateToProps = state => ({});
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = dispatch => ({
+  handleLogin: data => dispatch(login(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
