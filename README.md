@@ -1,2 +1,1 @@
-### CR-PROJECT
-# Developed in React.js
+# Developed with React.js
